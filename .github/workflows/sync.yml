@@ -5,6 +5,10 @@ on:
   - cron:  "*/180 * * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+  workflows: write
+  
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
@@ -12,7 +16,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         persist-credentials: true
-        token: ${{ secrets.SYNC_TOKEN }} 
+        token: ${{ github.token }}
     - name: repo-sync
       uses: repo-sync/github-sync@v2
       with:
@@ -20,4 +24,4 @@ jobs:
         source_branch: "main"
         destination_branch: "main"
         sync_tags: "true"
-        github_token: ${{ secrets.SYNC_TOKEN }}
+        github_token: ${{ github.token }}
