@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   build:
+    if: false  # This job will never execute
     runs-on: ubuntu-latest
     env:
       RELEASE_TAG: ${{ github.event.inputs.tag || github.ref_name }}
